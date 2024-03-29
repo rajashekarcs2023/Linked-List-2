@@ -1,0 +1,40 @@
+/*Logic:
+1. Brute force : Use a Hashset which has references of 1st list. Then iterate over the second list and keep checking if that reference already exists in the hashset, then thats the intersection.
+Space : O(m), T.C = O(m+n) 
+2. Optimize the space:
+    -Before iterating, make the lengths of the two linked lists equal by moving the pointer of the list which is lengthier, to the same distance.
+    -Now, we can iterate and find out the intersection.
+
+T.C = O(m+n)
+S.C = O(1)*/
+
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if(headA == null || headB == null)return null;
+
+        int lenA = 0, lenB = 0;
+        ListNode curr = headA;
+
+        while(curr!= null){
+            curr = curr.next;
+            lenA++;
+        }
+        curr = headB;
+        while(curr!= null){
+            curr = curr.next;
+            lenB++;
+        }
+        while(lenA > lenB){
+            headA = headA.next;
+            lenA--;
+        }
+        while(lenB > lenA){
+            headB = headB.next;
+            lenB--;
+        }
+        while(headA != headB){
+            headA = headA.next;
+            headB = headB.next;
+        }
+
+        return headA;
