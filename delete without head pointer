@@ -1,1 +1,12 @@
+Logic : replace its value by the next value, if the give pointer is pointing to the last node, replace it by null
 
+class Solution
+{
+    void deleteNode(Node del_node)
+    {
+         if(del_node == null) return;
+         
+         del_node.data = del_node.next.data;
+         del_node.next = del_node.next.next;
+    }
+}
